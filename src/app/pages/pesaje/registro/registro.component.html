@@ -1,0 +1,53 @@
+<nb-card size="medium">
+  <nb-card-body>
+    <form class="registro-container" [formGroup]="form" (ngSubmit)="registrar()" #pesajeForm="ngForm">
+      <div class="form-group row">
+        <label class="col-sm-3">Proceso</label>
+        <div class="col-sm-9">
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" value="IMP" formControlName="proceso">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Importación</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" value="EXP" formControlName="proceso">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Exportación</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" value="REC" formControlName="proceso">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Recepción</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPlaca" class="col-sm-3 col-form-label">Placa</label>
+        <div class="col-sm-9">
+          <input type="placa" class="form-control" id="inputPlaca" formControlName="placa">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputObs" class="col-sm-3 col-form-label">Obs.</label>
+        <div class="col-sm-9">
+          <textarea type="obs" class="form-control" id="inputObs" formControlName="obs"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="offset-sm-1 col-sm-12">
+          <button type="submit" class="btn btn-primary" [disabled]="pesajeForm.invalid">Guardar</button>
+          <button type="button" class="btn btn-primary" style="margin-left: 5px;" (click)="limpiar()">Limpiar</button>
+          <button type="button" class="btn btn-primary" style="margin-left: 5px;" (click)="openWindowPesajes()">Pesajes</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+
+</nb-card>

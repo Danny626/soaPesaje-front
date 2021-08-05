@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+    Balanzas
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarBalanza($event)"
+      (createConfirm)="crearBalanza($event)" (editConfirm)="editarBalanza($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

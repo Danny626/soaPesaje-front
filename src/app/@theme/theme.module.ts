@@ -12,6 +12,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbThemeModule,
+  NbCardModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -39,6 +40,12 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ParametrosComponent } from './parametros/parametros.component';
+
+const BASE_MODULES = [FormsModule, ReactiveFormsModule];
+
 const NB_MODULES = [
   NbLayoutModule,
   NbMenuModule,
@@ -52,6 +59,7 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbCardModule
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -61,6 +69,7 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  ParametrosComponent
 ];
 const PIPES = [
   CapitalizePipe,
@@ -71,8 +80,8 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES],
-  exports: [CommonModule, ...PIPES, ...COMPONENTS],
+  imports: [CommonModule, ...BASE_MODULES, ...NB_MODULES],
+  exports: [CommonModule, ...BASE_MODULES, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {

@@ -1,0 +1,78 @@
+::ng-deep .lista {
+    display: flex;
+    flex-direction: column;
+
+    .text-label {
+      margin-top: 1.5rem;
+    }
+  }
+
+  :host ::ng-deep ng2-st-tbody-edit-delete {
+    display: flex !important;
+    height: 0 !important;
+  }
+  
+  :host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+    // display: inline-block;
+    // width: 50px;
+    // text-align: center;
+    // font-size: 1.1em;
+
+    // display: -webkit-box;
+    // display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 1.25rem !important;
+    color: #a1a1e5;
+  }
+  
+  :host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+    color: #5dcfe3;
+  }
+
+  :host ::ng-deep ng2-st-tbody-custom {
+    display: flex !important;
+    height: 0 !important;
+  }
+
+  :host ::ng-deep {
+    .form-control:disabled {
+      background-color: #c1c0ba !important;
+    }
+  }
+
+
+
+  :host ::ng-deep ng2-smart-table table{
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+    border-width: 2px;
+    
+    display: table;
+    border-spacing: 2px;
+    border-color: grey; /* border of the big table*/
+  }
+/* grid lines */
+:host ::ng-deep ng2-smart-table table > tbody > tr > td {
+    box-sizing: border-box;
+    border: 1px solid grey;
+    font-size:10px;
+}
+
+/* headers grid color*/
+:host ::ng-deep ng2-smart-table thead > tr > th  { 
+    border: 1px solid grey;
+    background-color:#87aeff;
+}  
+/*font size*/
+:host ::ng-deep ng2-smart-table {
+    font-size:8px;
+}

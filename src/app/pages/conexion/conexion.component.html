@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+    Conexiones
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarConexion($event)"
+      (createConfirm)="crearConexion($event)" (editConfirm)="editarConexion($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

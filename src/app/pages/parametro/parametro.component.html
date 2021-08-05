@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+    Parámetros
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarParametro($event)"
+      (createConfirm)="crearParametro($event)" (editConfirm)="editarParametro($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

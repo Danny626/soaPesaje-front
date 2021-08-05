@@ -1,0 +1,50 @@
+<form class="params-container" [formGroup]="form" (ngSubmit)="aceptar()">
+  <nb-card>
+    <nb-card-header>Parámetros</nb-card-header>
+    <nb-card-body>
+      <div class="row" style="margin-top: -20px; font-size: 11px;">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="rec">Recinto</label>
+            <label id="rec" class="lblParam">{{selectedRecinto.nombre}}</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="bal">Balanza</label>
+            <label id="bal" class="lblParam">{{selectedBalanza.nombre}}</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="con">Conexión</label>
+            <label id="con" class="lblParam">{{selectedConexion.nombre}}</label>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <div class="col-12">
+    <!-- <label class="conex" for="inputRecinto">Recinto</label> -->
+    <nb-select id="inputRecinto" placeholder="Recinto" formControlName="recinto" style="margin-bottom: 10px; font-size: 10px;">
+      <nb-option *ngFor="let recinto of recintos" [value]="recinto">{{recinto.nombre}}</nb-option>
+    </nb-select>
+
+    <!-- <label class="conex" for="inputConexion">Conexión</label> -->
+    <nb-select id="inputConexion" placeholder="Conexión" formControlName="conexion" style="margin-bottom: 10px; font-size: 10px;">
+      <nb-option *ngFor="let conexion of conexiones" [value]="conexion">{{conexion.nombre}}</nb-option>
+    </nb-select>
+
+    <!-- <label class="conex" for="inputBalanza">Balanza</label> -->
+    <nb-select id="inputBalanza" placeholder="Balanza" formControlName="balanza" style="font-size: 10px;">
+      <nb-option *ngFor="let balanza of balanzas" [value]="balanza">{{balanza.nombre}}</nb-option>
+    </nb-select>
+
+    <div class="divBtn">
+      <div class="div2Btn">
+        <button class="btnAceptar" nbButton status="success" [disabled]="estadoBotonEstablecer()">Establecer</button>
+      </div>
+    </div>
+  </div>
+</form>

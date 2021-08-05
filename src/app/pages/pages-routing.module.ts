@@ -5,11 +5,91 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { PesajeComponent } from './pesaje/pesaje.component';
+import { AduanaComponent } from './aduana/aduana.component';
+import { RecintoComponent } from './recinto/recinto.component';
+import { BalanzaComponent } from './balanza/balanza.component';
+import { ConexionComponent } from './conexion/conexion.component';
+import { ParametroComponent } from './parametro/parametro.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    /**
+     * Componentes soaPesaje
+     */
+    {
+      path: 'inicio',
+      component: InicioComponent,
+    }, {
+      path: 'pesaje',
+      component: PesajeComponent,
+    }, {
+      path: 'aduana',
+      component: AduanaComponent,
+    }, {
+      path: 'recinto',
+      component: RecintoComponent,
+    }, {
+      path: 'balanza',
+      component: BalanzaComponent,
+    }, {
+      path: 'conexion',
+      component: ConexionComponent,
+    }, {
+      path: 'parametro',
+      component: ParametroComponent,
+    }, {
+      path: 'usuario',
+      component: UsuarioComponent,
+    },
+
+    /* {
+      path: 'inicio',
+      loadChildren: () => import('./inicio/inicio.module')
+        .then(m => m.InicioModule),
+    },
+    {
+      path: 'pesaje',
+      loadChildren: () => import('./pesaje/pesaje.module')
+        .then(m => m.PesajeModule),
+    },
+    {
+      path: 'aduana',
+      loadChildren: () => import('./aduana/aduana.module')
+        .then(m => m.AduanaModule),
+    },
+    {
+      path: 'recinto',
+      loadChildren: () => import('./recinto/recinto.module')
+        .then(m => m.RecintoModule),
+    },
+    {
+      path: 'balanza',
+      loadChildren: () => import('./balanza/balanza.module')
+        .then(m => m.BalanzaModule),
+    },
+    {
+      path: 'conexion',
+      loadChildren: () => import('./conexion/conexion.module')
+        .then(m => m.ConexionModule),
+    },
+    {
+      path: 'parametro',
+      loadChildren: () => import('./parametro/parametro.module')
+        .then(m => m.ParametroModule),
+    },
+    {
+      path: 'usuario',
+      loadChildren: () => import('./usuario/usuario.module')
+        .then(m => m.UsuarioModule),
+    }, */
+    /**
+     * Componentes Template
+     */
     {
       path: 'dashboard',
       component: ECommerceComponent,

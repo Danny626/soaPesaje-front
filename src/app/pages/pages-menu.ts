@@ -1,6 +1,57 @@
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
+  /**
+   * Menú soaPesaje
+   */
+  {
+    title: 'Inicio',
+    icon: 'nb-home',
+    link: '/pages/inicio',
+    home: true,
+  },
+  {
+    title: 'Pesaje',
+    icon: 'nb-paper-plane',
+    link: '/pages/pesaje',
+  },
+  {
+    title: 'REGISTRO',
+    group: true,
+  },
+  {
+    title: 'Recinto',
+    icon: 'nb-star',
+    link: '/pages/recinto',
+  },
+  {
+    title: 'Aduana',
+    icon: 'nb-cloudy',
+    link: '/pages/aduana',
+  },
+  {
+    title: 'Balanza',
+    icon: 'nb-grid-a-outline',
+    link: '/pages/balanza',
+  },
+  {
+    title: 'Conexión',
+    icon: 'nb-checkmark-circle',
+    link: '/pages/conexion',
+  },
+  {
+    title: 'Parámetro',
+    icon: 'nb-list',
+    link: '/pages/parametro',
+  },
+  {
+    title: 'Usuario',
+    icon: 'nb-person',
+    link: '/pages/usuario',
+  },
+  /**
+   * Menú Template
+   */
   {
     title: 'E-commerce',
     icon: 'shopping-cart-outline',

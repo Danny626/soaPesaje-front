@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+    Aduanas
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarAduana($event)"
+      (createConfirm)="crearAduana($event)" (editConfirm)="editarAduana($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
