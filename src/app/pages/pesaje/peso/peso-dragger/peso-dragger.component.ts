@@ -1,8 +1,18 @@
 import {
-  Component, HostListener, ViewChild, ElementRef, Input, Output, EventEmitter, AfterViewInit, OnChanges,
+  Component, 
+  HostListener, 
+  ViewChild, 
+  ElementRef, 
+  Input, 
+  Output, 
+  EventEmitter, 
+  AfterViewInit, 
+  OnChanges,
 } from '@angular/core';
+import { Location, LocationStrategy } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
+let uniqueId = 0;
 const VIEW_BOX_SIZE = 300;
 
 @Component({
@@ -12,14 +22,16 @@ const VIEW_BOX_SIZE = 300;
 })
 export class PesoDraggerComponent implements AfterViewInit, OnChanges {
 
-  @ViewChild('svgRoot') svgRoot: ElementRef;
+  @ViewChild('svgRoot', { static: true }) svgRoot: ElementRef;
 
-  @Input() fillColors: string | string[] = '#2ec6ff';
-  @Input() disableArcColor = '#999999';
+  @Input() fillColors: string|string[];
+  @Input() disableArcColor;
   @Input() bottomAngle = 90;
   @Input() arcThickness = 18; // CSS pixels
   @Input() thumbRadius = 16; // CSS pixels
   @Input() thumbBorder = 3;
+  @Input() thumbBg;
+  @Input() thumbBorderColor;
   @Input() maxLeap = 0.4;
 
   value = 50;
@@ -53,7 +65,7 @@ export class PesoDraggerComponent implements AfterViewInit, OnChanges {
   off = false;
   oldValue: number;
 
-  svgControlId = new Date().getTime();
+  svgControlId = uniqueId++;
   scaleFactor = 1;
   bottomAngleRad = 0;
   radius = 100;
@@ -77,7 +89,10 @@ export class PesoDraggerComponent implements AfterViewInit, OnChanges {
   private init = false;
 
   constructor(
-    private toastr: ToastrService) {
+    private location: Location,
+    private locationStrategy: LocationStrategy,
+    private toastr: ToastrService
+  ) {
     this.oldValue = this.value;
   }
 
@@ -120,6 +135,13 @@ export class PesoDraggerComponent implements AfterViewInit, OnChanges {
       this.toastr.error('Falta el Parámetro General Balanza',
         'Error', { timeOut: 5000 });
     }
+  }
+
+  getUrlPath(id: string) {
+    const baseHref = this.locationStrategy.getBaseHref().replace(/\/$/, '');
+    const path = this.location.path().replace(/\/$/, '');
+
+    return `url(${baseHref}${path}${id}${this.svgControlId})`;
   }
 
   private invalidate(): void {
@@ -258,7 +280,7 @@ export class PesoDraggerComponent implements AfterViewInit, OnChanges {
 
     const gradArray = [];
 
-    for (let i = 0, currentAngle = this.bottomAngleRad / 2; i < this.colors.length; i++ , currentAngle += angleStep) {
+    for (let i = 0, currentAngle = this.bottomAngleRad / 2; i < this.colors.length; i++, currentAngle += angleStep) {
       gradArray.push({
         start: { x: calcX(currentAngle), y: calcY(currentAngle) },
         end: { x: calcX(currentAngle + angleStep), y: calcY(currentAngle + angleStep) },

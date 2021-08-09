@@ -18,11 +18,6 @@
     z-index: 2;
   }
 
-  /* .circle {
-    fill: nb-theme(color-bg);
-    stroke: nb-theme(color-success);
-  } */
-
   .temperature-bg {
     position: absolute;
     width: 88%;
@@ -60,5 +55,9 @@
     &.on {
       color: nb-theme(text-hint-color);
     }
+  }
+
+  .power-icon {
+    font-size: 3rem;
   }
 }

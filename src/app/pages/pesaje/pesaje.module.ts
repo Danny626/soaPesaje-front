@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { NbCardModule } from '@nebular/theme';
+import { 
+  NbCardModule,
+  NbIconModule
+ } from '@nebular/theme';
 
 import { PesajeComponent } from './pesaje.component';
 import { PesoComponent } from './peso/peso.component';
@@ -24,7 +27,8 @@ import { PesoDraggerComponent } from './peso/peso-dragger/peso-dragger.component
     PdfViewerModule,
     NbDialogModule.forChild(),
     NbCardModule,
-    NbTabsetModule
+    NbTabsetModule,
+    NbIconModule
   ],
   declarations: [
     PesajeComponent,
