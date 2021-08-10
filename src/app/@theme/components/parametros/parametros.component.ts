@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Balanza } from '../../_model/balanza';
-import { Conexion } from '../../_model/conexion';
-import { Recinto } from '../../_model/recinto';
-import { BalanzaService } from '../../_service/balanza.service';
-import { ConexionService } from '../../_service/conexion.service';
-import { ParametrosService } from '../../_service/parametros.service';
-import { RecintoService } from '../../_service/recinto.service';
+import { Balanza } from '../../../_model/balanza';
+import { Conexion } from '../../../_model/conexion';
+import { Recinto } from '../../../_model/recinto';
+import { BalanzaService } from '../../../_service/balanza.service';
+import { ConexionService } from '../../../_service/conexion.service';
+import { ParametrosService } from '../../../_service/parametros.service';
+import { RecintoService } from '../../../_service/recinto.service';
 
 @Component({
   selector: 'ngx-parametros',

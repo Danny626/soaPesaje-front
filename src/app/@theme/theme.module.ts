@@ -10,9 +10,9 @@ import {
   NbContextMenuModule,
   NbButtonModule,
   NbSelectModule,
-  NbIconModule,
   NbThemeModule,
-  NbCardModule
+  NbCardModule,
+  NbIconModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -22,6 +22,8 @@ import {
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
+  ToggleSettingsButtonComponent,
+  ThemeSettingsComponent,
 } from './components';
 import {
   CapitalizePipe,
@@ -42,7 +44,7 @@ import { DARK_THEME } from './styles/theme.dark';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ParametrosComponent } from './parametros/parametros.component';
+import { ParametrosComponent } from './components/parametros/parametros.component';
 
 const BASE_MODULES = [FormsModule, ReactiveFormsModule];
 
@@ -57,9 +59,9 @@ const NB_MODULES = [
   NbSecurityModule,
   NbButtonModule,
   NbSelectModule,
+  NbCardModule,
   NbIconModule,
   NbEvaIconsModule,
-  NbCardModule
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -69,7 +71,9 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-  ParametrosComponent
+  ParametrosComponent,
+  ToggleSettingsButtonComponent,
+  ThemeSettingsComponent,
 ];
 const PIPES = [
   CapitalizePipe,
@@ -81,7 +85,7 @@ const PIPES = [
 
 @NgModule({
   imports: [CommonModule, ...BASE_MODULES, ...NB_MODULES],
-  exports: [CommonModule, ...BASE_MODULES, ...PIPES, ...COMPONENTS],
+  exports: [CommonModule, ...BASE_MODULES, ...PIPES, ...COMPONENTS, ...NB_MODULES],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {

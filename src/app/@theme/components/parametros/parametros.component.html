@@ -1,6 +1,5 @@
 <form class="params-container" [formGroup]="form" (ngSubmit)="aceptar()">
-  <nb-card>
-    <nb-card-header>Parámetros</nb-card-header>
+  <nb-card class="cardParams">
     <nb-card-body>
       <div class="row" style="margin-top: -20px; font-size: 11px;">
         <div class="col-sm-4">
@@ -27,17 +26,17 @@
 
   <div class="col-12">
     <!-- <label class="conex" for="inputRecinto">Recinto</label> -->
-    <nb-select id="inputRecinto" placeholder="Recinto" formControlName="recinto" style="margin-bottom: 10px; font-size: 10px;">
+    <nb-select id="inputRecinto" class="selectButton" placeholder="Recinto" formControlName="recinto" style="margin-bottom: 10px;">
       <nb-option *ngFor="let recinto of recintos" [value]="recinto">{{recinto.nombre}}</nb-option>
     </nb-select>
 
     <!-- <label class="conex" for="inputConexion">Conexión</label> -->
-    <nb-select id="inputConexion" placeholder="Conexión" formControlName="conexion" style="margin-bottom: 10px; font-size: 10px;">
+    <nb-select id="inputConexion" class="selectButton" placeholder="Conexión" formControlName="conexion" style="margin-bottom: 10px;">
       <nb-option *ngFor="let conexion of conexiones" [value]="conexion">{{conexion.nombre}}</nb-option>
     </nb-select>
 
     <!-- <label class="conex" for="inputBalanza">Balanza</label> -->
-    <nb-select id="inputBalanza" placeholder="Balanza" formControlName="balanza" style="font-size: 10px;">
+    <nb-select id="inputBalanza" class="selectButton" placeholder="Balanza" formControlName="balanza">
       <nb-option *ngFor="let balanza of balanzas" [value]="balanza">{{balanza.nombre}}</nb-option>
     </nb-select>
 
