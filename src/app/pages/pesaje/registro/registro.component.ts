@@ -30,7 +30,6 @@ export class RegistroComponent implements OnInit, OnDestroy {
   hoy: Date;
   balanza: Balanza;
   private subscription: Subscription;
-  placa: String;
 
   constructor(private pesajeService: PesajeService,
     private windowService: NbWindowService,
@@ -40,13 +39,11 @@ export class RegistroComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
-        this.placa = params.placa;
-        console.log(this.placa);
 
         this.form = new FormGroup({
           'peso': new FormControl(''),
           'proceso': new FormControl('', [Validators.required]),
-          'placa': new FormControl(params.placa, [Validators.required]),
+          'placa': new FormControl(params.placa === undefined ? '' : params.placa, [Validators.required]),
           'obs': new FormControl('', [Validators.required]),
         });
       }
