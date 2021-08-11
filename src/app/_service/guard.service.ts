@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import * as decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 import { TOKEN_NAME } from './../_shared/var.constant';
 import { LoginService } from './login.service';
 
@@ -24,7 +24,7 @@ export class GuardService implements CanActivate {
     } else {
       const token = JSON.parse(sessionStorage.getItem(TOKEN_NAME));
       if (!helper.isTokenExpired(token.access_token)) {
-        const decodedToken = decode(token.access_token);
+        const decodedToken = jwt_decode(token.access_token);
         return true;
       } else {
         sessionStorage.clear();

@@ -13,6 +13,7 @@ import { BalanzaComponent } from './balanza/balanza.component';
 import { ConexionComponent } from './conexion/conexion.component';
 import { ParametroComponent } from './parametro/parametro.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { GuardService } from '../_service/guard.service';
 
 const routes: Routes = [{
   path: '',
@@ -24,27 +25,35 @@ const routes: Routes = [{
     {
       path: 'inicio',
       component: InicioComponent,
+      canActivate: [GuardService]
     }, {
       path: 'pesaje',
       component: PesajeComponent,
+      canActivate: [GuardService]
     }, {
       path: 'aduana',
       component: AduanaComponent,
+      canActivate: [GuardService]
     }, {
       path: 'recinto',
       component: RecintoComponent,
+      canActivate: [GuardService]
     }, {
       path: 'balanza',
       component: BalanzaComponent,
+      canActivate: [GuardService]
     }, {
       path: 'conexion',
       component: ConexionComponent,
+      canActivate: [GuardService]
     }, {
       path: 'parametro',
       component: ParametroComponent,
+      canActivate: [GuardService]
     }, {
       path: 'usuario',
       component: UsuarioComponent,
+      canActivate: [GuardService]
     },
 
     /* {

@@ -12,6 +12,7 @@ import { TOKEN_NAME } from '../../../_shared/var.constant';
 import { WindowComponent } from '../window/window.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { JwtDecode } from '../../../_dto/jwtDecode';
 
 
 @Component({
@@ -108,9 +109,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
       this.pesaje.operacion = this.form.value['proceso'];
       const user = new Usuario;
       const tk = JSON.parse(sessionStorage.getItem(TOKEN_NAME));
-      const decodedToken = jwt_decode(tk.access_token);
-      console.log('el decodedToken es: ', decodedToken);
-      user.username = 'danny';
+      const decodedToken : JwtDecode = jwt_decode(tk.access_token);
+      user.username = decodedToken.user_name;
       this.pesaje.usuario = user;
       this.pesaje.balanza = this.balanza;
       this.subscription = this.pesajeService.registrar(this.pesaje).subscribe(data => {
