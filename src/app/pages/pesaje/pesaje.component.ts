@@ -12,7 +12,6 @@ interface CardSettings {
   templateUrl: './pesaje.component.html',
 })
 export class PesajeComponent {
-
 }
 
 

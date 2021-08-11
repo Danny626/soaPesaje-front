@@ -11,6 +11,7 @@ import { PesajeService } from '../../../_service/pesaje.service';
 import { TOKEN_NAME } from '../../../_shared/var.constant';
 import { WindowComponent } from '../window/window.component';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -29,16 +30,28 @@ export class RegistroComponent implements OnInit, OnDestroy {
   hoy: Date;
   balanza: Balanza;
   private subscription: Subscription;
+  placa: String;
 
   constructor(private pesajeService: PesajeService,
     private windowService: NbWindowService,
-    private toastr: ToastrService) {
-    this.form = new FormGroup({
-      'peso': new FormControl(''),
-      'proceso': new FormControl('', [Validators.required]),
-      'placa': new FormControl('', [Validators.required]),
-      'obs': new FormControl('', [Validators.required]),
-    });
+    private toastr: ToastrService,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params);
+        this.placa = params.placa;
+        console.log(this.placa);
+
+        this.form = new FormGroup({
+          'peso': new FormControl(''),
+          'proceso': new FormControl('', [Validators.required]),
+          'placa': new FormControl(params.placa, [Validators.required]),
+          'obs': new FormControl('', [Validators.required]),
+        });
+      }
+    );
+
     this.pesaje = new Pesaje;
     this.localAuxPesaje = new AuxPesaje();
     this.balanza = new Balanza;
