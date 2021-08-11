@@ -1,4 +1,4 @@
-<nb-card size="medium">
+<nb-card size="large">
   <nb-tabset fullWidth (changeTab)="tabActivo($event)">
 
     <nb-tab tabTitle="Peso Balanza">
@@ -8,7 +8,7 @@
                           [fillColors]="theme.arcFill" [thumbBg]="theme.thumbBg" [thumbBorderColor]="theme.thumbBorder">
 
           <div class="slider-value-container" [ngClass]="{ 'off': temperatureOff }">
-            <div class="value">
+            <div class="value temperature h1">
               {{ temperatureOff ? '--' : (temperature) }}
             </div>
             <div class="desc">
