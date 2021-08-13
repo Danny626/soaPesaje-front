@@ -14,6 +14,7 @@ import { ConexionComponent } from './conexion/conexion.component';
 import { ParametroComponent } from './parametro/parametro.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { GuardService } from '../_service/guard.service';
+import { GuardPesajeService } from '../_service/guard-pesaje.service';
 
 const routes: Routes = [{
   path: '',
@@ -29,7 +30,7 @@ const routes: Routes = [{
     }, {
       path: 'pesaje',
       component: PesajeComponent,
-      canActivate: [GuardService]
+      canActivate: [GuardPesajeService]
     }, {
       path: 'aduana',
       component: AduanaComponent,

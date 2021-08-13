@@ -11,7 +11,7 @@ import { PesajeService } from '../../../_service/pesaje.service';
 import { TOKEN_NAME } from '../../../_shared/var.constant';
 import { WindowComponent } from '../window/window.component';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { JwtDecode } from '../../../_dto/jwtDecode';
 
 
@@ -35,12 +35,11 @@ export class RegistroComponent implements OnInit, OnDestroy {
   constructor(private pesajeService: PesajeService,
     private windowService: NbWindowService,
     private toastr: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.route.queryParams
-      .subscribe(params => {
-        console.log(params);
-
+      .subscribe((params: Params) => {
+        console.log(params.placa)
         this.form = new FormGroup({
           'peso': new FormControl(''),
           'proceso': new FormControl('', [Validators.required]),
