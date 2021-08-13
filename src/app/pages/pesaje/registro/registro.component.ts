@@ -13,6 +13,7 @@ import { WindowComponent } from '../window/window.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { JwtDecode } from '../../../_dto/jwtDecode';
+import { GuardPesajeService } from '../../../_service/guard-pesaje.service';
 
 
 @Component({
@@ -35,19 +36,17 @@ export class RegistroComponent implements OnInit, OnDestroy {
   constructor(private pesajeService: PesajeService,
     private windowService: NbWindowService,
     private toastr: ToastrService,
-    private route: ActivatedRoute,
+    private guardPesajeService: GuardPesajeService
   ) {
-    this.route.queryParams
-      .subscribe((params: Params) => {
-        console.log(params.placa)
-        this.form = new FormGroup({
-          'peso': new FormControl(''),
-          'proceso': new FormControl('', [Validators.required]),
-          'placa': new FormControl(params.placa === undefined ? '' : params.placa, [Validators.required]),
-          'obs': new FormControl('', [Validators.required]),
-        });
-      }
-    );
+
+    const placa = this.guardPesajeService.infoPlaca;
+    
+    this.form = new FormGroup({
+      'peso': new FormControl(''),
+      'proceso': new FormControl('', [Validators.required]),
+      'placa': new FormControl(placa === undefined ? '' : placa, [Validators.required]),
+      'obs': new FormControl('', [Validators.required]),
+    });
 
     this.pesaje = new Pesaje;
     this.localAuxPesaje = new AuxPesaje();

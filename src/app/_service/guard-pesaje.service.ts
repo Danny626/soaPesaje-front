@@ -12,6 +12,8 @@ import { LoginService } from './login.service';
 })
 export class GuardPesajeService {
 
+  placa: string;
+
   constructor(
     private loginService: LoginService,
     private balanzaUsuarioService: BalanzaUsuarioService,
@@ -30,6 +32,7 @@ export class GuardPesajeService {
     if (!rpta) {
       sessionStorage.clear();
       if ( usuario !== undefined && placa !== undefined) {
+        this.setInfoPlaca(placa);
         return this.login(usuario, rutaPesaje);
       } else {
         this.router.navigate(['login']);
@@ -38,6 +41,9 @@ export class GuardPesajeService {
     } else {
       const token = JSON.parse(sessionStorage.getItem(TOKEN_NAME));
       if (!helper.isTokenExpired(token.access_token)) {
+        if ( usuario !== undefined && placa !== undefined ) {
+          this.setInfoPlaca(placa);
+        }
         const decodedToken = jwt_decode(token.access_token);
         return true;
       } else {
@@ -51,6 +57,14 @@ export class GuardPesajeService {
       }
     }
     
+  }
+
+  get infoPlaca(): string {
+    return this.placa;
+  }
+
+  setInfoPlaca(placa: string) {
+    this.placa = placa;
   }
 
   login(userName: string, rutaPesaje: string) {
@@ -69,4 +83,5 @@ export class GuardPesajeService {
               });
         });
   }
+
 }
