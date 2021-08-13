@@ -3,29 +3,20 @@
     <form class="registro-container" [formGroup]="form" (ngSubmit)="registrar()" #pesajeForm="ngForm">
       <div class="form-group row">
         <label class="col-sm-3">Proceso</label>
-        <div class="col-sm-9">
-          <div class="form-check">
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" value="IMP" formControlName="proceso">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Importación</span>
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" value="EXP" formControlName="proceso">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Exportación</span>
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" value="REC" formControlName="proceso">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Recepción</span>
-            </label>
-          </div>
-        </div>
+        <nb-radio-group [(value)]="radioGroupValue" formControlName="proceso">
+          <nb-radio
+            [value]="'IMP'">
+            Importación
+          </nb-radio>
+          <nb-radio
+            [value]="'EXP'">
+            Exportación
+          </nb-radio>
+          <nb-radio
+            [value]="'REC'">
+            Recepción
+          </nb-radio>
+        </nb-radio-group>
       </div>
       <div class="form-group row">
         <label for="inputPlaca" class="col-sm-3 col-form-label">Placa</label>

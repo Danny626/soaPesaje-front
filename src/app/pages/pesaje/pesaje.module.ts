@@ -5,7 +5,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ThemeModule } from '../../@theme/theme.module';
 import { 
   NbCardModule,
-  NbIconModule
+  NbIconModule,
+  NbRadioModule
  } from '@nebular/theme';
 
 import { PesajeComponent } from './pesaje.component';
@@ -28,7 +29,8 @@ import { PesoDraggerComponent } from './peso/peso-dragger/peso-dragger.component
     NbDialogModule.forChild(),
     NbCardModule,
     NbTabsetModule,
-    NbIconModule
+    NbIconModule,
+    NbRadioModule
   ],
   declarations: [
     PesajeComponent,

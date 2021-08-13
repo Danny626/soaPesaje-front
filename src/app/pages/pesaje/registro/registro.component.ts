@@ -31,6 +31,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
   pesaje: Pesaje;
   hoy: Date;
   balanza: Balanza;
+  radioGroupValue = 'REC';
   private subscription: Subscription;
 
   constructor(private pesajeService: PesajeService,

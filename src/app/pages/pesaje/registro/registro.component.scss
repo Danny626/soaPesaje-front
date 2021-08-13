@@ -324,4 +324,14 @@
       }
     }
   }
+
+  .nb-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nb-radio {
+    align-items: center;
+    justify-content: center;
+  }
 }

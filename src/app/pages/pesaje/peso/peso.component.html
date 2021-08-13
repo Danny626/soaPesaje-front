@@ -23,11 +23,9 @@
 
       <div class="slider-container" style="margin-top: 100px;">
         <div class="slider-value-container">
-          <div class="input-group">
-            <input class="borderInput" type="text" nbInput placeholder="Ingrese el peso"
-              style="text-align:center" [(ngModel)]="pesoManual" (ngModelChange)="enviaPesoManual($event)">
-          </div>
-          <div class="desc">
+          <input class="inputPesoManual value temperature h1" type="text" nbInput placeholder="Ingrese el peso manual"
+            style="text-align:center" [(ngModel)]="pesoManual" (ngModelChange)="enviaPesoManual($event)">
+          <div class="value h1 desc">
             Kg.
           </div>
         </div>
