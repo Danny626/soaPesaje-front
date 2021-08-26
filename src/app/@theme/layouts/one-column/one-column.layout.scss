@@ -7,6 +7,15 @@
     padding-top: nb-theme(layout-padding-top);
   }
 
+  .headerSettings {
+    height: 0px;
+  }
+
+  .headerSettings ::ng-deep nav {
+    height: 0px;
+    box-shadow: none;
+  }
+
   nb-sidebar.settings-sidebar {
     $sidebar-width: 19rem;
 

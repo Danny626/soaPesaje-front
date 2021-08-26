@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Params, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import jwt_decode from "jwt-decode";
 import { BalanzaUsuario } from '../_model/balanzaUsuario';
@@ -13,6 +13,7 @@ import { LoginService } from './login.service';
 export class GuardPesajeService {
 
   placa: string;
+  loginDirecto: boolean = false;
 
   constructor(
     private loginService: LoginService,
@@ -33,6 +34,7 @@ export class GuardPesajeService {
       sessionStorage.clear();
       if ( usuario !== undefined && placa !== undefined) {
         this.setInfoPlaca(placa);
+        this.setInfoLoginDirecto(true);
         return this.login(usuario, rutaPesaje);
       } else {
         this.router.navigate(['login']);
@@ -43,6 +45,7 @@ export class GuardPesajeService {
       if (!helper.isTokenExpired(token.access_token)) {
         if ( usuario !== undefined && placa !== undefined ) {
           this.setInfoPlaca(placa);
+          this.setInfoLoginDirecto(true);
         }
         const decodedToken = jwt_decode(token.access_token);
         return true;
@@ -65,6 +68,14 @@ export class GuardPesajeService {
 
   setInfoPlaca(placa: string) {
     this.placa = placa;
+  }
+
+  get infoLoginDirecto(): boolean {
+    return this.loginDirecto;
+  }
+
+  setInfoLoginDirecto(loginDirecto: boolean) {
+    this.loginDirecto = loginDirecto;
   }
 
   login(userName: string, rutaPesaje: string) {
