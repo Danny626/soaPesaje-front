@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Usuario } from '../_model/usuario';
 import { LoginService } from '../_service/login.service';
 import { UsuarioService } from '../_service/usuario.service';
 import { TOKEN_NAME } from '../_shared/var.constant';
 import { Subscription } from 'rxjs';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-login',
@@ -17,13 +17,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
   registroForm: FormGroup;
+  error: string = "";
+  mensaje: string = "";
   private subscription: Subscription;
 
   constructor(
     private loginService: LoginService,
     private router: Router,
     private usuarioService: UsuarioService,
-    private toastr: ToastrService,
   ) {
   }
 
@@ -49,17 +50,38 @@ export class LoginComponent implements OnInit, OnDestroy {
     email = this.loginForm.value['email'];
     let passw: string = '';
     passw = this.loginForm.value['password'];
-    this.subscription = this.loginService.login(email, passw).subscribe(data => {
-      if (data) {
-        const token = JSON.stringify(data);
-        sessionStorage.setItem(TOKEN_NAME, token);
+    this.subscription = this.loginService.login(email, passw)
+      .subscribe(
+        (res: Response) => {
+          if (res) {
+            this.mensaje = 'Login correcto...Bienvenid@'
+            const token = JSON.stringify(res);
+            sessionStorage.setItem(TOKEN_NAME, token);
+            
+            setTimeout(() => {
+              this.router.navigate(['pages']);
+            }, 1500);
 
-        // const tk = JSON.parse(sessionStorage.getItem(TOKEN_NAME));
-        // const decodedToken = decode(tk.access_token);
-        // sessionStorage.setItem('usuario', decodedToken.user_name);
-        this.router.navigate(['pages']);
-      }
-    });
+            // const tk = JSON.parse(sessionStorage.getItem(TOKEN_NAME));
+            // const decodedToken = decode(tk.access_token);
+            // sessionStorage.setItem('usuario', decodedToken.user_name);
+          }
+        },
+        err => {
+          if ( err.status == '400' ) {
+            this.error = 'Usuario/Contraseña inválidos';
+            /* this.toastrService.show(
+              'Usuario/Contraseña inválidos',
+              'Error',
+              {
+                status: 'danger',
+                duration: 5000
+              }
+            ); */
+          }
+        },
+        () => {}
+    );
   }
 
   crearUsuario() {
@@ -71,11 +93,27 @@ export class LoginComponent implements OnInit, OnDestroy {
       usuario.username = this.registroForm.value['usuario'];
       this.subscription = this.usuarioService.registrar(usuario).subscribe(data => {
         this.usuarioService.mensaje.next('Se registró');
-        this.toastr.success('Se registró', 'Éxito', { timeOut: 5000 });
+        this.mensaje = 'Usuario Creado';
+        /*this.toastrService.show(
+          'Usuario Creado',
+          `Éxito`,
+          {
+            status: 'success',
+            duration: 5000
+          }
+        ); */
       });
     } else {
-      this.usuarioService.mensaje.next('Error verifique las contraseñas.');
-      this.toastr.error('Error verifique las contraseñas.', 'Error', { timeOut: 5000 });
+      this.usuarioService.mensaje.next('Verifique las contraseñas.');
+      this.error = 'Verifique las contraseñas';
+      /* this.toastrService.show(
+        'Verifique las contraseñas',
+        `Error`,
+        {
+          status: 'danger',
+          duration: 5000
+        }
+      ); */
     }
   }
 }

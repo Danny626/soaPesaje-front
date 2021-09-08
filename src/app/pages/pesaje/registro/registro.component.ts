@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NbWindowService } from '@nebular/theme';
+import { NbToastrService, NbWindowService } from '@nebular/theme';
 import jwt_decode from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { AuxPesaje } from '../../../_model/auxPesaje';
@@ -11,7 +11,6 @@ import { PesajeService } from '../../../_service/pesaje.service';
 import { TOKEN_NAME } from '../../../_shared/var.constant';
 import { WindowComponent } from '../window/window.component';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
 import { JwtDecode } from '../../../_dto/jwtDecode';
 import { GuardPesajeService } from '../../../_service/guard-pesaje.service';
 
@@ -36,7 +35,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
   constructor(private pesajeService: PesajeService,
     private windowService: NbWindowService,
-    private toastr: ToastrService,
+    private toastrService: NbToastrService,
     private guardPesajeService: GuardPesajeService
   ) {
 
@@ -76,8 +75,14 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
       if (sessionStorage.getItem('balanza') == null) {
         this.pesajeService.mensaje.next('Falta el Parámetro Balanza.');
-        this.toastr.error('Falta el Parámetro General Balanza',
-          'Error', { timeOut: 5000 });
+        this.toastrService.show(
+          'Falta el Parámetro General Balanza',
+          `Error`,
+          {
+            status: 'danger',
+            duration: 5000
+          }
+        );
       } else {
         this.balanza = JSON.parse(sessionStorage.getItem('balanza'));
       }
@@ -90,8 +95,14 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
     if (this.varPeso === 0 || this.varPeso == null) {
       this.pesajeService.mensaje.next('Capture un Peso ya sea de Balanza o Manual.');
-      this.toastr.error('Capture un Peso ya sea de Balanza o Manual',
-        'Error', { timeOut: 5000 });
+      this.toastrService.show(
+        'Capture un Peso ya sea de Balanza o Manual',
+        `Error`,
+        {
+          status: 'danger',
+          duration: 5000
+        }
+      );
     } else {
       this.pesaje.peso = this.varPeso;
       this.pesaje.pesoTara = 0;
@@ -116,8 +127,14 @@ export class RegistroComponent implements OnInit, OnDestroy {
         this.subscription = this.pesajeService.listarPesajes().subscribe(pesajes => {
           this.pesajeService.pesajeCambio.next(pesajes);
           this.pesajeService.mensaje.next('Se registró');
-          this.toastr.success('Se registró correctamente. Enseguida se mostrará la ventana de impresión',
-            'Éxito', { timeOut: 5000 });
+          this.toastrService.show(
+            'Se registró correctamente. Enseguida se mostrará la ventana de impresión',
+            `Éxito`,
+            {
+              status: 'success',
+              duration: 5000
+            }
+          );
           this.imprimirPesaje(data);
         });
       });

@@ -72,8 +72,25 @@
 
           </div>
 
+          <div class="cardError" *ngIf="error">
+            <!-- <img src="img_avatar.png" alt="Avatar" style="width:100%"> -->
+            <div class="container">
+              <h4><b>{{error}}</b></h4>
+            </div>
+          </div>
+
+          <div class="cardMensaje" *ngIf="mensaje">
+            <!-- <img src="img_avatar.png" alt="Avatar" style="width:100%"> -->
+            <div class="container">
+              <h4><b>{{mensaje}}</b></h4>
+            </div>
+          </div>
+
         </div>
+
+
       </div>
     </div>
+
   <!-- </nb-layout-column>
 </nb-layout> -->

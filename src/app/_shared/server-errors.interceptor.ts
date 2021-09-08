@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { NbToastrService } from '@nebular/theme';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { REINTENTOS } from './var.constant';
@@ -11,7 +11,7 @@ import { REINTENTOS } from './var.constant';
 export class ServerErrorsInterceptor implements HttpInterceptor {
 
     constructor(
-        private toastr: ToastrService,
+        private toastrService: NbToastrService
     ) {
     }
 
@@ -34,16 +34,44 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
                 // https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
                 if (err.status === 400) {
                     // this.snackBar.open(err.error.mensaje, 'ERROR 400', { duration: 5000 });
-                    this.toastr.error(err.error.error, 'ERROR 400', { timeOut: 5000 });
+                    this.toastrService.show(
+                        err.error.error,
+                        `ERROR 400`,
+                        {
+                        status: 'danger',
+                        duration: 5000
+                        }
+                    );
                 } else if (err.status === 401) {
                     // this.router.navigate(['/login']);
-                    this.toastr.error(err.error.error, 'ERROR 401', { timeOut: 5000 });
+                    this.toastrService.show(
+                        err.error.error,
+                        `ERROR 401`,
+                        {
+                        status: 'danger',
+                        duration: 5000
+                        }
+                    );
                 } else if (err.status === 500) {
                     // this.snackBar.open(err.error.mensaje, 'ERROR 500', { duration: 5000 });
-                    this.toastr.error(err.error, 'ERROR 500', { timeOut: 5000 });
+                    this.toastrService.show(
+                        err.error,
+                        `ERROR 500`,
+                        {
+                        status: 'danger',
+                        duration: 5000
+                        }
+                    );
                 } else {
                     // this.snackBar.open(err.error.mensaje, 'ERROR', { duration: 5000 });
-                    this.toastr.error(err.error.error, 'ERROR', { timeOut: 5000 });
+                    this.toastrService.show(
+                        err.error.error,
+                        `ERROR`,
+                        {
+                        status: 'danger',
+                        duration: 5000
+                        }
+                    );
                 }
                 return EMPTY;
             }));

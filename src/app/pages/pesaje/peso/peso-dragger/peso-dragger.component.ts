@@ -10,7 +10,7 @@ import {
   OnChanges,
 } from '@angular/core';
 import { Location, LocationStrategy } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+import { NbToastrService } from '@nebular/theme';
 
 let uniqueId = 0;
 const VIEW_BOX_SIZE = 300;
@@ -91,7 +91,7 @@ export class PesoDraggerComponent implements AfterViewInit, OnChanges {
   constructor(
     private location: Location,
     private locationStrategy: LocationStrategy,
-    private toastr: ToastrService
+    private toastrService: NbToastrService
   ) {
     this.oldValue = this.value;
   }
@@ -132,8 +132,14 @@ export class PesoDraggerComponent implements AfterViewInit, OnChanges {
       }
       this.invalidatePinPosition();
     } else {
-      this.toastr.error('Falta el Parámetro General Balanza',
-        'Error', { timeOut: 5000 });
+      this.toastrService.show(
+        'Falta el Parámetro General Balanza',
+        `Error`,
+        {
+          status: 'danger',
+          duration: 5000
+        }
+      );
     }
   }
 
