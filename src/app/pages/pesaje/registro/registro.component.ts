@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NbToastrService, NbWindowService } from '@nebular/theme';
 import jwt_decode from 'jwt-decode';
-import { ToastrService } from 'ngx-toastr';
 import { AuxPesaje } from '../../../_model/auxPesaje';
 import { Balanza } from '../../../_model/balanza';
 import { Pesaje } from '../../../_model/pesaje';
