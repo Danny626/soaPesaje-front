@@ -53,4 +53,12 @@ export class RecintoService {
         .set('Content-Type', 'application/json'),
     });
   }
+
+  buscarPorCodRecinto(codRecinto: string) {
+    const access_token = JSON.parse(sessionStorage.getItem(TOKEN_NAME)).access_token;
+    return this.http.get<Recinto>(`${this.url}/codRecinto/${codRecinto}`, {
+      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
+        .set('Content-Type', 'application/json'),
+    });
+  }
 }
