@@ -26,29 +26,23 @@
           </div>
 
 
-          <div class="cont_back_info">
+          <!-- <div class="cont_back_info">
             <div class="cont_img_back_grey">
-              <!-- <img
-            src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
-            alt="" /> -->
               <img
                 src="assets/images/alboSalar.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
                 alt="" />
             </div>
 
-          </div>
+          </div> -->
           <div class="cont_forms">
-            <div class="cont_img_back_">
-              <!-- <img
-            src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
-            alt="" /> -->
+            <!-- <div class="cont_img_back_">
               <img
                 src="assets/images/alboSalar.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
                 alt="" />
-            </div>
+            </div> -->
             <form class="login-container" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="cont_form_login">
-                <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+                <a href="javascript:void(0)" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
                 <h2>INGRESO</h2>
                 <input id="emailLogin" type="text" placeholder="Email" formControlName="email" autofocus/>
                 <input id="passwordLogin" type="password" placeholder="Password" formControlName="password" />
@@ -58,7 +52,7 @@
 
             <form class="registro-container" [formGroup]="registroForm" (ngSubmit)="crearUsuario()">
               <div class="cont_form_sign_up">
-                <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+                <a href="javascript:void(0)" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
                 <h2>REGISTRO</h2>
                 <input id="emailRegistro" type="text" placeholder="Email" formControlName="email" required autofocus/>
                 <input id="usuarioRegistro" type="text" placeholder="Usuario" formControlName="usuario" required />
