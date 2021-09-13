@@ -2,8 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PesajeComponent } from './pesaje/pesaje.component';
@@ -100,7 +98,7 @@ const routes: Routes = [{
     /**
      * Componentes Template
      */
-    {
+    /* {
       path: 'dashboard',
       component: ECommerceComponent,
     },
@@ -157,10 +155,10 @@ const routes: Routes = [{
       path: 'miscellaneous',
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
-    },
+    }, */
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'inicio',
       pathMatch: 'full',
     },
     {

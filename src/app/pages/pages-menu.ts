@@ -6,13 +6,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
    */
   {
     title: 'Inicio',
-    icon: 'nb-home',
+    icon: 'home-outline',
     link: '/pages/inicio',
     home: true,
   },
   {
     title: 'Pesaje',
-    icon: 'nb-paper-plane',
+    icon: 'car-outline',
     link: '/pages/pesaje',
   },
   {
@@ -21,38 +21,38 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Recinto',
-    icon: 'nb-star',
+    icon: 'loader-outline',
     link: '/pages/recinto',
   },
   {
     title: 'Aduana',
-    icon: 'nb-cloudy',
+    icon: 'book-outline',
     link: '/pages/aduana',
   },
   {
     title: 'Balanza',
-    icon: 'nb-grid-a-outline',
+    icon: 'settings-outline',
     link: '/pages/balanza',
   },
   {
     title: 'Conexión',
-    icon: 'nb-checkmark-circle',
+    icon: 'radio-outline',
     link: '/pages/conexion',
   },
   {
     title: 'Parámetro',
-    icon: 'nb-list',
+    icon: 'options-2-outline',
     link: '/pages/parametro',
   },
   {
     title: 'Usuario',
-    icon: 'nb-person',
+    icon: 'people-outline',
     link: '/pages/usuario',
   },
   /**
    * Menú Template
    */
-  {
+  /* {
     title: 'E-commerce',
     icon: 'shopping-cart-outline',
     link: '/pages/dashboard',
@@ -294,5 +294,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
-  },
+  }, */
 ];
