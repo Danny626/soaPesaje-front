@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { SolarData } from '../../@core/data/solar';
-import { LoginService } from '../../_service/login.service';
+/* import { SolarData } from '../../@core/data/solar';
+import { LoginService } from '../../_service/login.service'; */
 
 interface CardSettings {
   title: string;
@@ -80,19 +80,19 @@ export class InicioComponent implements OnInit, OnDestroy {
     };
 
   constructor(private themeService: NbThemeService,
-    private solarService: SolarData,
-    private loginService: LoginService) {
+    /* private solarService: SolarData, */
+    /* private loginService: LoginService */) {
     this.subscription = this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.statusCards = this.statusCardsByThemes[theme.name];
       });
 
-    this.subscription = this.solarService.getSolarData()
+/*     this.subscription = this.solarService.getSolarData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((data) => {
         this.solarValue = data;
-      });
+      }); */
   }
 
   ngOnInit() {

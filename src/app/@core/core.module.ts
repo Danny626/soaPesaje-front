@@ -13,7 +13,13 @@ import {
   StateService,
 } from './utils';
 import { UserData } from './data/users';
-import { ElectricityData } from './data/electricity';
+import { TemperatureHumidityData } from './data/temperature-humidity';
+
+import { UserService } from './mock/users.service';
+import { TemperatureHumidityService } from './mock/temperature-humidity.service';
+
+import { MockDataModule } from './mock/mock-data.module';
+/* import { ElectricityData } from './data/electricity';
 import { SmartTableData } from './data/smart-table';
 import { UserActivityData } from './data/user-activity';
 import { OrdersChartData } from './data/orders-chart';
@@ -23,14 +29,13 @@ import { EarningData } from './data/earning';
 import { OrdersProfitChartData } from './data/orders-profit-chart';
 import { TrafficBarData } from './data/traffic-bar';
 import { ProfitBarAnimationChartData } from './data/profit-bar-animation-chart';
-import { TemperatureHumidityData } from './data/temperature-humidity';
 import { SolarData } from './data/solar';
 import { TrafficChartData } from './data/traffic-chart';
 import { StatsBarData } from './data/stats-bar';
 import { CountryOrderData } from './data/country-order';
 import { StatsProgressBarData } from './data/stats-progress-bar';
 import { VisitorsAnalyticsData } from './data/visitors-analytics';
-import { SecurityCamerasData } from './data/security-cameras';
+import { SecurityCamerasData } from './data/security-cameras'; */
 
 const socialLinks = [
   {
@@ -51,8 +56,9 @@ const socialLinks = [
 ];
 
 const DATA_SERVICES = [
-/*   { provide: UserData, useClass: UserService },
-  { provide: ElectricityData, useClass: ElectricityService },
+  { provide: UserData, useClass: UserService },
+  { provide: TemperatureHumidityData, useClass: TemperatureHumidityService },
+/*  { provide: ElectricityData, useClass: ElectricityService },
   { provide: SmartTableData, useClass: SmartTableService },
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
@@ -62,7 +68,6 @@ const DATA_SERVICES = [
   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService },
   { provide: TrafficBarData, useClass: TrafficBarService },
   { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService },
-  { provide: TemperatureHumidityData, useClass: TemperatureHumidityService },
   { provide: SolarData, useClass: SolarService },
   { provide: TrafficChartData, useClass: TrafficChartService },
   { provide: StatsBarData, useClass: StatsBarService },
@@ -80,7 +85,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  /* ...MockDataModule.forRoot().providers, */
+  ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
 
