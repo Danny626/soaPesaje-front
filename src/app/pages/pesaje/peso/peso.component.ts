@@ -68,7 +68,6 @@ export class PesoComponent implements OnDestroy, OnInit {
       this.pesajeService.connect();
       this.subscription = this.pesajeService.subjectObservable$.subscribe(auxPesaje => {
         this.temperature = auxPesaje.pesoBalanza;
-        console.log(this.temperature);
       });
     } else {
       this.pesajeService.disconnect();

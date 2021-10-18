@@ -44,7 +44,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
       'peso': new FormControl(''),
       'proceso': new FormControl('', [Validators.required]),
       'placa': new FormControl(placa === undefined ? '' : placa, [Validators.required]),
-      'obs': new FormControl('', [Validators.required]),
+      'obs': new FormControl(''),
     });
 
     this.pesaje = new Pesaje;
@@ -127,14 +127,14 @@ export class RegistroComponent implements OnInit, OnDestroy {
           this.pesajeService.pesajeCambio.next(pesajes);
           this.pesajeService.mensaje.next('Se registró');
           this.toastrService.show(
-            'Se registró correctamente. Enseguida se mostrará la ventana de impresión',
+            'Se registró correctamente.',
             `Éxito`,
             {
               status: 'success',
               duration: 5000
             }
           );
-          this.imprimirPesaje(data);
+          /* this.imprimirPesaje(data); */
         });
       });
     }
