@@ -48,8 +48,12 @@ export class PesajeService implements OnDestroy {
 
 
         this.subscription = _this.stompClient.subscribe('/topic/peso', function (peso) {
-          console.log('llega:', peso.body);
-          _this.showPeso(peso.body);
+          let datoPeso = peso.body;
+          
+          if ( datoPeso !== '' && datoPeso && datoPeso != null ) {
+            _this.showPeso(datoPeso);
+          }
+
         });
 
       };
@@ -104,8 +108,6 @@ export class PesajeService implements OnDestroy {
     if (this.localAuxPesaje == null) {
       this.localAuxPesaje = new AuxPesaje();
     }
-    console.log('dato bruto', dato);
-    console.log('dato convertido', dato.replace(/\D/g, ''));
     this.localAuxPesaje.pesoBalanza = Number(dato.replace(/\D/g, ''));
     this.subject.next(this.localAuxPesaje);
   }
