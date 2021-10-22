@@ -1,4 +1,4 @@
-// export const HOST = 'http://192.168.200.118:8080/SoaPesaje-backend';
+// export const HOST = 'http://localhost:8080/SoaPesaje-backend';
 // INI despliegue
 export const HOST = 'http://localhost:8080/SoaPesaje-backend';
 // FIN despliegue
