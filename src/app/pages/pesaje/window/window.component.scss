@@ -30,7 +30,7 @@
     height: 100%;
     width: 100%;
     font-size: 1.25rem !important;
-    color: #a1a1e5;
+    /* color: #a1a1e5; */
   }
   
   :host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
@@ -50,7 +50,7 @@
 
 
 
-  :host ::ng-deep ng2-smart-table table{
+  /* :host ::ng-deep ng2-smart-table table{
     border-style: inset;
     border-color: initial;
     border-image: initial;
@@ -58,21 +58,36 @@
     
     display: table;
     border-spacing: 2px;
-    border-color: grey; /* border of the big table*/
-  }
+    border-color: grey; 
+  } */
+
 /* grid lines */
 :host ::ng-deep ng2-smart-table table > tbody > tr > td {
     box-sizing: border-box;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     font-size:10px;
 }
 
 /* headers grid color*/
-:host ::ng-deep ng2-smart-table thead > tr > th  { 
+/* :host ::ng-deep ng2-smart-table thead > tr > th  { 
     border: 1px solid grey;
     background-color:#87aeff;
-}  
+}  */ 
+
 /*font size*/
 :host ::ng-deep ng2-smart-table {
     font-size:8px;
+}
+
+// cambio tamaño columna envioServidor
+:host ::ng-deep .envioServidor .ng2-smart-title {
+  width: 10px;
+}
+
+:host ::ng-deep .fecha .ng2-smart-title {
+  width: 100px;
+}
+
+:host ::ng-deep .balanza .ng2-smart-title {
+  width: 120px;
 }

@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NbToastrService, NbWindowService } from '@nebular/theme';
+import { NbToastrService, NbWindowConfig, NbWindowService } from '@nebular/theme';
 import jwt_decode from 'jwt-decode';
+import { Subscription } from 'rxjs';
+import { JwtDecode } from '../../../_dto/jwtDecode';
 import { AuxPesaje } from '../../../_model/auxPesaje';
 import { Balanza } from '../../../_model/balanza';
 import { Pesaje } from '../../../_model/pesaje';
 import { Usuario } from '../../../_model/usuario';
+import { GuardPesajeService } from '../../../_service/guard-pesaje.service';
 import { PesajeService } from '../../../_service/pesaje.service';
 import { TOKEN_NAME } from '../../../_shared/var.constant';
 import { WindowComponent } from '../window/window.component';
-import { Subscription } from 'rxjs';
-import { JwtDecode } from '../../../_dto/jwtDecode';
-import { GuardPesajeService } from '../../../_service/guard-pesaje.service';
 
 
 @Component({
@@ -123,19 +123,16 @@ export class RegistroComponent implements OnInit, OnDestroy {
       this.pesaje.usuario = user;
       this.pesaje.balanza = this.balanza;
       this.subscription = this.pesajeService.registrar(this.pesaje).subscribe(data => {
-        this.subscription = this.pesajeService.listarPesajes().subscribe(pesajes => {
-          this.pesajeService.pesajeCambio.next(pesajes);
-          this.pesajeService.mensaje.next('Se registró');
-          this.toastrService.show(
-            'Se registró correctamente.',
-            `Éxito`,
-            {
-              status: 'success',
-              duration: 5000
-            }
-          );
-          /* this.imprimirPesaje(data); */
-        });
+        this.pesajeService.mensaje.next('Se registró');
+        this.toastrService.show(
+          'Se registró correctamente.',
+          `Éxito`,
+          {
+            status: 'success',
+            duration: 5000
+          }
+        );
+        /* this.imprimirPesaje(data); */
       });
     }
   }
@@ -180,7 +177,11 @@ export class RegistroComponent implements OnInit, OnDestroy {
   }
 
   openWindowPesajes() {
-    this.windowService.open(WindowComponent, { title: `Pesajes`, closeOnBackdropClick: false });
+    this.windowService.open(WindowComponent, { 
+      title: `Pesajes`, 
+      closeOnBackdropClick: false,
+      windowClass: 'modal-adaptive-s1'
+    });
   }
 
 }

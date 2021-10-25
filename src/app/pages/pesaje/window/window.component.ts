@@ -20,9 +20,11 @@ export class WindowComponent implements OnInit, OnDestroy {
   listaBalanza: ObjJSON[] = [];
   pesaje: Pesaje;
   balanzas: Balanza[] = [];
+  selectedRows: Pesaje;
   private subscription: Subscription;
 
   settings = {
+    selectMode: 'multi',
     hideSubHeader: true,
     actions: {
       add: false,
@@ -58,7 +60,7 @@ export class WindowComponent implements OnInit, OnDestroy {
       this.source.load(pesajes);
     });
 
-    this.subscription = this.pesajeService.listarPesajes().subscribe(pesajes => {
+    this.subscription = this.pesajeService.listarPesajes(0, 5).subscribe(pesajes => {
       this.source.load(pesajes);
 
       this.subscription = this.balanzaService.listarBalanzas().subscribe(balanzas => {
@@ -68,6 +70,7 @@ export class WindowComponent implements OnInit, OnDestroy {
         }
 
         this.settings = {
+          selectMode: 'multi',
           hideSubHeader: true,
           actions: {
             add: false,
@@ -105,7 +108,7 @@ export class WindowComponent implements OnInit, OnDestroy {
               type: 'string',
             },
             envioServidor: {
-              title: 'Sync.',
+              title: 'Sinc',
               type: 'string',
             },
             operacion: {
@@ -140,9 +143,9 @@ export class WindowComponent implements OnInit, OnDestroy {
   }
 
   eliminarPesaje(event) {
-    if (window.confirm('Are you sure you want to delete?')) {
+    if (window.confirm('Está seguro de eliminar el registro?')) {
       this.subscription = this.pesajeService.eliminar(this.pesaje.id).subscribe(data => {
-        this.subscription = this.pesajeService.listarPesajes().subscribe(pesajes => {
+        this.subscription = this.pesajeService.listarPesajes(0, 5).subscribe(pesajes => {
           this.source = new LocalDataSource();
           this.source.load(pesajes);
           this.pesajeService.pesajeCambio.next(pesajes);
@@ -176,7 +179,7 @@ export class WindowComponent implements OnInit, OnDestroy {
     this.pesaje.usuario = JSON.parse(sessionStorage.getItem('usuario'));
 
     this.subscription = this.pesajeService.registrar(this.pesaje).subscribe(data => {
-      this.subscription = this.pesajeService.listarPesajes().subscribe(pesajes => {
+      this.subscription = this.pesajeService.listarPesajes(0, 5).subscribe(pesajes => {
         this.source = new LocalDataSource();
         this.source.load(pesajes);
         this.pesajeService.pesajeCambio.next(pesajes);
@@ -229,7 +232,7 @@ export class WindowComponent implements OnInit, OnDestroy {
     this.pesaje.envioServidor = event.newData.envioServidor;
 
     this.subscription = this.pesajeService.modificar(this.pesaje).subscribe(data => {
-      this.subscription = this.pesajeService.listarPesajes().subscribe(pesajes => {
+      this.subscription = this.pesajeService.listarPesajes(0, 5).subscribe(pesajes => {
         this.source = new LocalDataSource();
         this.source.load(pesajes);
         this.pesajeService.pesajeCambio.next(pesajes);
@@ -237,6 +240,14 @@ export class WindowComponent implements OnInit, OnDestroy {
         event.confirm.resolve(event.newData);
       });
     });
+  }
+
+  onUserRowSelect(event) {
+    this.selectedRows = event.selected;
+  }
+
+  verPesajesNoSinc() {
+    
   }
 
 }

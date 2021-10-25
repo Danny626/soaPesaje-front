@@ -1,3 +1,10 @@
-<ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarPesaje($event)"
-  (createConfirm)="crearPesaje($event)" class="lista" (custom)="imprimirPesaje($event)" (editConfirm)="editarPesaje($event)">
-</ng2-smart-table>
+<div>
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
+    <button type="button" class="btn btn-primary" (click)="verPesajesNoSinc()">Ver registros sin sincronizar</button>
+  </div>
+  
+  <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarPesaje($event)"
+    (createConfirm)="crearPesaje($event)" class="lista" (custom)="imprimirPesaje($event)" 
+    (editConfirm)="editarPesaje($event)" (userRowSelect)="onUserRowSelect($event)">
+  </ng2-smart-table>
+</div>

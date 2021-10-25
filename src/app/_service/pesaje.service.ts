@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Client } from '@stomp/stompjs';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
 import { AuxPesaje } from '../_model/auxPesaje';
 import { Pesaje } from '../_model/pesaje';
@@ -120,12 +121,14 @@ export class PesajeService implements OnDestroy {
     });
   }
 
-  listarPesajes() {
+  listarPesajes(p: number, s: number) {
     const access_token = JSON.parse(sessionStorage.getItem(TOKEN_NAME)).access_token;
-    return this.http.get<Pesaje[]>(this.url, {
+    return this.http.get<Pesaje[]>(`${this.url}?page=${p}&size=${s}`, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
         .set('Content-Type', 'application/json'),
-    });
+    }).pipe(
+      map((data: any) => data.content)
+    );
   }
 
   sendAuxPesaje(auxPesaje: AuxPesaje) {
