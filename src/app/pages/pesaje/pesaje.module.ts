@@ -18,6 +18,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DialogBoletaComponent } from './dialog-boleta/dialog-boleta.component';
 import { RegistroComponent } from './registro/registro.component';
 import { PesoDraggerComponent } from './peso/peso-dragger/peso-dragger.component';
+import { SharedModule } from '../../_shared/shared.module';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { PesoDraggerComponent } from './peso/peso-dragger/peso-dragger.component
     NbCardModule,
     NbTabsetModule,
     NbIconModule,
-    NbRadioModule
+    NbRadioModule,
+    SharedModule
   ],
   declarations: [
     PesajeComponent,
@@ -38,13 +40,12 @@ import { PesoDraggerComponent } from './peso/peso-dragger/peso-dragger.component
     WindowComponent,
     DialogBoletaComponent,
     RegistroComponent,
-    PesoDraggerComponent
+    PesoDraggerComponent,
   ],
   entryComponents: [
-    WindowComponent,
     DialogBoletaComponent,
     RegistroComponent,
-    PesoDraggerComponent
+    PesoDraggerComponent,
   ],
 })
 export class PesajeModule { }

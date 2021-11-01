@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Client } from '@stomp/stompjs';
+import { ServerDataSource } from 'ng2-smart-table';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
@@ -8,6 +9,11 @@ import { AuxPesaje } from '../_model/auxPesaje';
 import { Pesaje } from '../_model/pesaje';
 import { HOST, TOKEN_NAME } from '../_shared/var.constant';
 import { Balanza } from './../_model/balanza';
+
+export interface UserQuery {
+  search: string;
+  registration: Date;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -178,6 +184,17 @@ export class PesajeService implements OnDestroy {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
         .set('Content-Type', 'application/json'),
     });
+  }
+
+  cargarPesajes() {
+    return new ServerDataSource(this.http, 
+      {
+        endPoint: `${this.url}`, 
+        dataKey: 'content', 
+        pagerPageKey: 'page', 
+        pagerLimitKey: 'size',
+        totalKey: 'totalElements'
+      });
   }
 
 }
