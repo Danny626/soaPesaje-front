@@ -186,10 +186,21 @@ export class PesajeService implements OnDestroy {
     });
   }
 
-  cargarPesajes() {
+  listarPesajesPaginado() {
     return new ServerDataSource(this.http, 
       {
         endPoint: `${this.url}`, 
+        dataKey: 'content', 
+        pagerPageKey: 'page', 
+        pagerLimitKey: 'size',
+        totalKey: 'totalElements'
+      });
+  }
+
+  listarPesajesNoSincronizados() {
+    return new ServerDataSource(this.http, 
+      {
+        endPoint: `${this.url}/listaNoSincronizados`, 
         dataKey: 'content', 
         pagerPageKey: 'page', 
         pagerLimitKey: 'size',

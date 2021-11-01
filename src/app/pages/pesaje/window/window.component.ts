@@ -153,7 +153,7 @@ export class WindowComponent implements OnInit, OnDestroy {
   }
 
   cargarPesajes() {
-    this.source = this.pesajeService.cargarPesajes();
+    this.source = this.pesajeService.listarPesajesPaginado();
   }
 
   eliminarPesaje(event) {
@@ -262,6 +262,10 @@ export class WindowComponent implements OnInit, OnDestroy {
 
   verPesajesNoSinc() {
 
+  }
+
+  cargarPesajesNoSincronizados() {
+    this.source = this.pesajeService.listarPesajesNoSincronizados();
   }
 
 }
