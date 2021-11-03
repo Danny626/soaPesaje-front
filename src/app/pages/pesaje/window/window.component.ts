@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NbToastrService } from '@nebular/theme';
 import { ServerDataSource } from 'ng2-smart-table';
 import { Subscription } from 'rxjs';
@@ -58,7 +59,8 @@ export class WindowComponent implements OnInit, OnDestroy {
 
   constructor(private pesajeService: PesajeService,
     private balanzaService: BalanzaService,
-    private toastrService: NbToastrService) {
+    private toastrService: NbToastrService,
+    private domSanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -79,75 +81,7 @@ export class WindowComponent implements OnInit, OnDestroy {
         this.listaBalanza.push({ title: item.nombre, value: item.id });
       }
 
-      this.settings = {
-        selectMode: this.flagVerSinc == true ? 'multi':'single',
-        hideSubHeader: true,
-        pager:{
-          display: true,
-          perPage: this.pageSize,
-        },
-        actions: {
-          add: false,
-          custom: [
-            {
-              name: 'imprAction',
-              title: '<i class="fa fa-print" title="Imprimir"></i>',
-            },
-          ],
-        },
-        edit: {
-          editButtonContent: '<i class="nb-edit"></i>',
-          saveButtonContent: '<i class="nb-checkmark"></i>',
-          cancelButtonContent: '<i class="nb-close"></i>',
-          confirmSave: true,
-        },
-        delete: {
-          deleteButtonContent: '<i class="nb-trash"></i>',
-          confirmDelete: true,
-        },
-        columns: {
-          peso: {
-            title: 'Peso',
-            type: 'number',
-          },
-          fecha: {
-            title: 'Fecha',
-            editable: false,
-            valuePrepareFunction: (created) => {
-              return new DatePipe('es-BO').transform(new Date(created), 'dd/MM/yyyy HH:mm:ss');
-            },
-          },
-          placa: {
-            title: 'Placa',
-            type: 'string',
-          },
-          envioServidor: {
-            title: 'Sinc',
-            type: 'string',
-          },
-          operacion: {
-            title: 'Operación',
-            type: 'string',
-          },
-          balanza: {
-            title: 'Balanza',
-            type: 'html',
-            valuePrepareFunction: (cell, row) => cell.nombre,
-            editor: {
-              type: 'list',
-              config: {
-                list: this.listaBalanza,
-              },
-            },
-          },
-          usuario: {
-            title: 'Usuario',
-            type: 'html',
-            editable: false,
-            valuePrepareFunction: (cell, row) => cell.username,
-          },
-        },
-      };
+      this.cargarNuevoSetting();
     });
    /*  }); */
   }
@@ -268,6 +202,7 @@ export class WindowComponent implements OnInit, OnDestroy {
 
   cargarPesajesNoSincronizados() {
     this.flagVerSinc = true;
+    this.selectedRows = null;
     this.cargarNuevoSetting();
     this.source = this.pesajeService.listarPesajesNoSincronizados();
   }
@@ -316,12 +251,25 @@ export class WindowComponent implements OnInit, OnDestroy {
           type: 'string',
         },
         envioServidor: {
+          /* title: 'Sinc',
+          type: 'string', */
           title: 'Sinc',
-          type: 'string',
+          type: 'html',
+          valuePrepareFunction: (cell, row) => {
+            if ( cell === 'SI' ) return this.domSanitizer.bypassSecurityTrustHtml(`<div style="color:green"><strong>${cell}</strong></div>`);
+            if ( cell === 'NO' ) return this.domSanitizer.bypassSecurityTrustHtml(`<div style="color:red"><strong>${cell}</strong></div>`);
+          }
         },
         operacion: {
+          /* title: 'Operación',
+          type: 'string', */
           title: 'Operación',
-          type: 'string',
+          type: 'html',
+          valuePrepareFunction: (cell, row) => {
+            if ( cell === 'REC' ) return 'RECEPCION';
+            if ( cell === 'EXP' ) return 'EXPORTACION';
+            if ( cell === 'IMP' ) return 'IMPORTACION';
+          }
         },
         balanza: {
           title: 'Balanza',
