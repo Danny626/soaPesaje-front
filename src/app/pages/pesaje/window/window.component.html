@@ -1,6 +1,14 @@
 <div>
-  <div style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
-    <button type="button" class="btn btn-primary" (click)="cargarPesajesNoSincronizados()">Ver registros sin sincronizar</button>
+  <div class="actions">
+    <div class="actionsSinc">
+      <button type="button" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()">Sinc. seleccionados</button>
+      <button type="button" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
+    </div>
+
+    <div class="actionsVer">
+      <button type="button" class="btn btn-primary buttonNoSinc" (click)="cargarPesajesNoSincronizados()">Ver no sincronizados</button>
+      <button type="button" class="btn btn-primary buttonTodos" (click)="cargarPesajes()">Ver todos</button>
+    </div>
   </div>
   
   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarPesaje($event)"

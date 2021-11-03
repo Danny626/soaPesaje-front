@@ -91,3 +91,37 @@
 :host ::ng-deep .balanza .ng2-smart-title {
   width: 120px;
 }
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.actionsVer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actionsSinc {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonSincTodos {
+  font-size: 12px;
+}
+
+.buttonSincSelec {
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.buttonNoSinc {
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.buttonTodos {
+  font-size: 12px;
+}

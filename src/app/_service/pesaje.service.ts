@@ -5,6 +5,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
+import { PesajesSincronizadosDTO } from '../_dto/pesajesSincronizadosDTO';
 import { AuxPesaje } from '../_model/auxPesaje';
 import { Pesaje } from '../_model/pesaje';
 import { HOST, TOKEN_NAME } from '../_shared/var.constant';
@@ -206,6 +207,15 @@ export class PesajeService implements OnDestroy {
         pagerLimitKey: 'size',
         totalKey: 'totalElements'
       });
+  }
+
+  sincronizarTodos() {
+    const access_token = JSON.parse(sessionStorage.getItem(TOKEN_NAME)).access_token;
+
+    return this.http.get<PesajesSincronizadosDTO>(`${this.url}/sincTodos`, {
+      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
+        .set('Content-Type', 'application/json'),
+    });
   }
 
 }

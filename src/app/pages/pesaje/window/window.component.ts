@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NbToastrService } from '@nebular/theme';
 import { ServerDataSource } from 'ng2-smart-table';
 import { Subscription } from 'rxjs';
+import { PesajesSincronizadosDTO } from '../../../_dto/pesajesSincronizadosDTO';
 import { Balanza } from '../../../_model/balanza';
 import { ObjJSON } from '../../../_model/objJSON';
 import { Pesaje } from '../../../_model/pesaje';
@@ -54,7 +56,8 @@ export class WindowComponent implements OnInit, OnDestroy {
   };
 
   constructor(private pesajeService: PesajeService,
-    private balanzaService: BalanzaService) {
+    private balanzaService: BalanzaService,
+    private toastrService: NbToastrService) {
   }
 
   ngOnInit() {
@@ -267,5 +270,35 @@ export class WindowComponent implements OnInit, OnDestroy {
   cargarPesajesNoSincronizados() {
     this.source = this.pesajeService.listarPesajesNoSincronizados();
   }
+
+  sincronizarTodos() {
+    this.subscription = this.pesajeService.sincronizarTodos().subscribe( (resp: PesajesSincronizadosDTO) => {
+      
+      if ( resp.cantError !== 0 ) {
+        this.toastrService.show(
+          `${resp.cantError} de ${resp.cantidad} no pudieron ser sincronizados. Intente nuevamente por favor.`,
+          `Error`,
+          {
+            status: 'danger',
+            duration: 5000
+          }
+        );
+      }
+
+      if ( resp.cantError === 0 ) {
+        this.toastrService.show(
+          `Se sincronizaron ${resp.cantSinc} de ${resp.cantidad} registros correctamente.`,
+          `Éxito`,
+          {
+            status: 'success',
+            duration: 5000
+          }
+        );
+      }
+      
+    });
+  }
+
+  sincronizarSeleccionados() {}
 
 }
