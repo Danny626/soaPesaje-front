@@ -218,4 +218,13 @@ export class PesajeService implements OnDestroy {
     });
   }
 
+  sincronizarSeleccionados (pesajes: Pesaje[]) {
+    const access_token = JSON.parse(sessionStorage.getItem(TOKEN_NAME)).access_token;
+
+    return this.http.post(`${this.url}/sincSeleccionados`, pesajes, {
+      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
+        .set('Content-Type', 'application/json'),
+    });
+  }
+
 }

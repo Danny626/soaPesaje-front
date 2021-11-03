@@ -1,8 +1,8 @@
 <div>
   <div class="actions">
     <div class="actionsSinc">
-      <button type="button" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()">Sinc. seleccionados</button>
-      <button type="button" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
+      <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()" [disabled]="!selectedRows?.length > 0">Sinc. seleccionados</button>
+      <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
     </div>
 
     <div class="actionsVer">
@@ -16,5 +16,4 @@
     (editConfirm)="editarPesaje($event)" (userRowSelect)="onUserRowSelect($event)">
   </ng2-smart-table>
 
-  <!-- <ngx-paginator></ngx-paginator> -->
 </div>

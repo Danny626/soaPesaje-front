@@ -68,16 +68,31 @@
     font-size:10px;
 }
 
+/* estilo para el checkbox para seleccionar filas */
+:host /deep/ .ng2-smart-action-multiple-select {
+  text-align: center;
+}
+
+:host /deep/ .ng2-smart-action-multiple-select > input {
+  width: 14px;
+  height: 14px;
+  display: unset;
+}
+
 /* headers grid color*/
 /* :host ::ng-deep ng2-smart-table thead > tr > th  { 
-    border: 1px solid grey;
-    background-color:#87aeff;
-}  */ 
+  border: 1px solid grey;
+  background-color:#87aeff;
+} */
+
+:host ::ng-deep ng2-smart-table {
+  text-align: center;
+}
 
 /*font size*/
-:host ::ng-deep ng2-smart-table {
-    font-size:8px;
-}
+/* :host ::ng-deep ng2-smart-table {
+    font-size:1px;
+} */
 
 // cambio tamaño columna envioServidor
 :host ::ng-deep .envioServidor .ng2-smart-title {

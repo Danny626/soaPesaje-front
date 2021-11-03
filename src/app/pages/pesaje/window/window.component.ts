@@ -22,12 +22,13 @@ export class WindowComponent implements OnInit, OnDestroy {
   listaBalanza: ObjJSON[] = [];
   pesaje: Pesaje;
   balanzas: Balanza[] = [];
-  selectedRows: Pesaje;
+  selectedRows: Pesaje[];
   pageSize: number = 5;
+  flagVerSinc: boolean = false;
   private subscription: Subscription;
 
   settings = {
-    selectMode: 'multi',
+    selectMode: this.flagVerSinc == true ? 'multi':'single',
     hideSubHeader: true,
     pager:{
       display: true,
@@ -79,7 +80,7 @@ export class WindowComponent implements OnInit, OnDestroy {
       }
 
       this.settings = {
-        selectMode: 'multi',
+        selectMode: this.flagVerSinc == true ? 'multi':'single',
         hideSubHeader: true,
         pager:{
           display: true,
@@ -157,6 +158,8 @@ export class WindowComponent implements OnInit, OnDestroy {
 
   cargarPesajes() {
     this.source = this.pesajeService.listarPesajesPaginado();
+    this.flagVerSinc = false;
+    this.cargarNuevoSetting();
   }
 
   eliminarPesaje(event) {
@@ -263,12 +266,84 @@ export class WindowComponent implements OnInit, OnDestroy {
     this.selectedRows = event.selected;
   }
 
-  verPesajesNoSinc() {
-
+  cargarPesajesNoSincronizados() {
+    this.flagVerSinc = true;
+    this.cargarNuevoSetting();
+    this.source = this.pesajeService.listarPesajesNoSincronizados();
   }
 
-  cargarPesajesNoSincronizados() {
-    this.source = this.pesajeService.listarPesajesNoSincronizados();
+  cargarNuevoSetting() {
+    let newSettings = {
+      selectMode: this.flagVerSinc == true ? 'multi':'single',
+      hideSubHeader: true,
+      pager:{
+        display: true,
+        perPage: this.pageSize,
+      },
+      actions: {
+        add: false,
+        custom: [
+          {
+            name: 'imprAction',
+            title: '<i class="fa fa-print" title="Imprimir"></i>',
+          },
+        ],
+      },
+      edit: {
+        editButtonContent: '<i class="nb-edit"></i>',
+        saveButtonContent: '<i class="nb-checkmark"></i>',
+        cancelButtonContent: '<i class="nb-close"></i>',
+        confirmSave: true,
+      },
+      delete: {
+        deleteButtonContent: '<i class="nb-trash"></i>',
+        confirmDelete: true,
+      },
+      columns: {
+        peso: {
+          title: 'Peso',
+          type: 'number',
+        },
+        fecha: {
+          title: 'Fecha',
+          editable: false,
+          valuePrepareFunction: (created) => {
+            return new DatePipe('es-BO').transform(new Date(created), 'dd/MM/yyyy HH:mm:ss');
+          },
+        },
+        placa: {
+          title: 'Placa',
+          type: 'string',
+        },
+        envioServidor: {
+          title: 'Sinc',
+          type: 'string',
+        },
+        operacion: {
+          title: 'Operación',
+          type: 'string',
+        },
+        balanza: {
+          title: 'Balanza',
+          type: 'html',
+          valuePrepareFunction: (cell, row) => cell.nombre,
+          editor: {
+            type: 'list',
+            config: {
+              list: this.listaBalanza,
+            },
+          },
+        },
+        usuario: {
+          title: 'Usuario',
+          type: 'html',
+          editable: false,
+          valuePrepareFunction: (cell, row) => cell.username,
+        },
+      },
+    };
+
+    this.settings = Object.assign({}, newSettings);
   }
 
   sincronizarTodos() {
@@ -299,6 +374,30 @@ export class WindowComponent implements OnInit, OnDestroy {
     });
   }
 
-  sincronizarSeleccionados() {}
+  sincronizarSeleccionados() {
+    this.subscription = this.pesajeService.sincronizarSeleccionados(this.selectedRows).subscribe((resp: PesajesSincronizadosDTO) => {
+      if ( resp.cantError !== 0 ) {
+        this.toastrService.show(
+          `${resp.cantError} de ${resp.cantidad} no pudieron ser sincronizados. Intente nuevamente por favor.`,
+          `Error`,
+          {
+            status: 'danger',
+            duration: 5000
+          }
+        );
+      }
+
+      if ( resp.cantError === 0 ) {
+        this.toastrService.show(
+          `Se sincronizaron ${resp.cantSinc} de ${resp.cantidad} registros correctamente.`,
+          `Éxito`,
+          {
+            status: 'success',
+            duration: 5000
+          }
+        );
+      }
+    })
+  }
 
 }
