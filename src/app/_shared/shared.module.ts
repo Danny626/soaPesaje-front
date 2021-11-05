@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaginatorComponent } from './paginator/paginator.component';
 
-const sharedComponents = [PaginatorComponent];
+const sharedComponents = [];
 
 @NgModule({
   declarations: [sharedComponents],

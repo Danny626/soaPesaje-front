@@ -1,5 +1,9 @@
 <div>
   <div class="actions">
+    <!-- <div class="busqueda">
+      <button nbButton ghost [nbPopover]="formBusquedaComponent"><nb-icon icon="search"></nb-icon></button>
+    </div> -->
+
     <div class="actionsSinc">
       <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()" [disabled]="!selectedRows?.length > 0">Sinc. seleccionados</button>
       <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>

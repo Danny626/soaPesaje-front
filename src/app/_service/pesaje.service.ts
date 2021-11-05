@@ -5,6 +5,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
+import { ParamsBusquedaDTO } from '../_dto/paramsBusquedaDTO';
 import { PesajesSincronizadosDTO } from '../_dto/pesajesSincronizadosDTO';
 import { AuxPesaje } from '../_model/auxPesaje';
 import { Pesaje } from '../_model/pesaje';
@@ -222,6 +223,15 @@ export class PesajeService implements OnDestroy {
     const access_token = JSON.parse(sessionStorage.getItem(TOKEN_NAME)).access_token;
 
     return this.http.post(`${this.url}/sincSeleccionados`, pesajes, {
+      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
+        .set('Content-Type', 'application/json'),
+    });
+  }
+
+  buscarPesajes(paramsBusqueda: ParamsBusquedaDTO) {
+    const access_token = JSON.parse(sessionStorage.getItem(TOKEN_NAME)).access_token;
+
+    return this.http.post(`${this.url}/busquedaPesajes`, paramsBusqueda, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
         .set('Content-Type', 'application/json'),
     });

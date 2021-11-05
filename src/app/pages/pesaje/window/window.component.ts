@@ -10,6 +10,7 @@ import { ObjJSON } from '../../../_model/objJSON';
 import { Pesaje } from '../../../_model/pesaje';
 import { BalanzaService } from '../../../_service/balanza.service';
 import { PesajeService } from '../../../_service/pesaje.service';
+import { BusquedaPesajesComponent } from './busqueda-pesajes/busqueda-pesajes.component';
 
 @Component({
   selector: 'ngx-window',
@@ -26,6 +27,7 @@ export class WindowComponent implements OnInit, OnDestroy {
   selectedRows: Pesaje[];
   pageSize: number = 5;
   flagVerSinc: boolean = false;
+  formBusquedaComponent = BusquedaPesajesComponent;
   private subscription: Subscription;
 
   settings = {
@@ -346,6 +348,10 @@ export class WindowComponent implements OnInit, OnDestroy {
         );
       }
     })
+  }
+
+  buscarPesajes() {
+    console.log('busqueda');
   }
 
 }
