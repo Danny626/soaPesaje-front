@@ -43,14 +43,22 @@ export class BusquedaPesajesComponent implements OnInit {
   buscarPesajes() {
     const paramsBusqueda: ParamsBusquedaDTO = {
       placa: this.form.value['placa'],
-      fechaInicial: this.form.value['fechas'].start,
-      fechaFinal: this.form.value['fechas'].end,
+      fechaInicial: null,
+      fechaFinal: null,
       operacion: this.form.value['operacion'],
       nombreUsuario: this.form.value['usuario'],
     }
 
+    if ( this.form.value['fechas'] !== null ) {
+      paramsBusqueda.fechaInicial = this.form.value['fechas'].start;
+      paramsBusqueda.fechaFinal = this.form.value['fechas'].end;
+    }
+
+
     this.source = this.pesajeService.buscarPesajesPaginado(paramsBusqueda);
     this.pesajeService.dataSourceCambio.next(this.source);
+
+    this.cerrarBusqueda();
     
   }
 
