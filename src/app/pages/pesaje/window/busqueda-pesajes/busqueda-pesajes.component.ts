@@ -48,10 +48,15 @@ export class BusquedaPesajesComponent implements OnInit {
       operacion: this.form.value['operacion'],
       nombreUsuario: this.form.value['usuario'],
     }
-
+    
     if ( this.form.value['fechas'] !== null ) {
       paramsBusqueda.fechaInicial = this.form.value['fechas'].start;
-      paramsBusqueda.fechaFinal = this.form.value['fechas'].end;
+      
+      if ( this.form.value['fechas'].end ) {
+        paramsBusqueda.fechaFinal = this.form.value['fechas'].end;
+      } else {
+        paramsBusqueda.fechaFinal = this.form.value['fechas'].start;
+      }
     }
 
 
