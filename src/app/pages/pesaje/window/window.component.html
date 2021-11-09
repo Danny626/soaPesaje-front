@@ -5,13 +5,14 @@
     <nb-card-body>
       <div class="actions">
         <div class="busqueda">
-          <button nbButton ghost (click)="openFormBusqueda()"><nb-icon icon="search"></nb-icon></button>
+          <button class="buttonBuscar" nbButton ghost (click)="openFormBusqueda()"><nb-icon icon="search"></nb-icon></button>
+          
+          <div class="actionsSinc">
+            <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()" [disabled]="!selectedRows?.length > 0">Sinc. seleccionados</button>
+            <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
+          </div>
         </div>
     
-        <div class="actionsSinc">
-          <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()" [disabled]="!selectedRows?.length > 0">Sinc. seleccionados</button>
-          <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
-        </div>
     
         <div class="actionsVer">
           <button type="button" class="btn btn-primary buttonNoSinc" (click)="cargarPesajesNoSincronizados()">Ver no sincronizados</button>
