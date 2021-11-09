@@ -1,30 +1,35 @@
-<div class="p-4">
-    <form [formGroup]="form" (ngSubmit)="buscarPesajes()">
-        <div class="form-group">
-            <!-- <input nbInput placeholder="Rango de fechas" [nbDatepicker]="rangepicker" formControlName="fechas">
-            <nb-rangepicker #rangepicker></nb-rangepicker> -->
-            <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker" formControlName="fechas">
-            <nb-datepicker #dateTimePicker></nb-datepicker>
-        </div>
+<nb-card>
+    <nb-card-header>{{ title }}</nb-card-header>
+    
+    <nb-card-body>
+        <form [formGroup]="form" (ngSubmit)="buscarPesajes()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Placa" formControlName="placa">
+            </div>
 
-        <div class="form-group">
-            <nb-select multiple  placeholder="Operación" formControlName="operacion">
-                <nb-option value="REC">Recepción</nb-option>
-                <nb-option value="IMP">Importación</nb-option>
-                <nb-option value="EXP">Exportación</nb-option>
-            </nb-select>
-        </div>
-
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Placa" formControlName="placa">
-        </div>
-
-        <div class="form-group">
-            <nb-select multiple  placeholder="Usuario" formControlName="usuario">
-                <nb-option *ngFor="let usr of usuarios" value="usr.username"> {{ usr.username }} </nb-option>
-            </nb-select>
-        </div>
-
-        <button matRipple type="submit" class="btn btn-primary w-100">Buscar</button>
-    </form>
-  </div>
+            <div class="form-group">
+                <input nbInput class="pickerDate" placeholder="Rango de fechas" [nbDatepicker]="rangepicker" formControlName="fechas">
+                <nb-rangepicker #rangepicker ></nb-rangepicker>
+            </div>
+    
+            <div class="form-group">
+                <nb-select class="operacion" multiple  placeholder="Operación" formControlName="operacion">
+                    <nb-option value="REC">Recepción</nb-option>
+                    <nb-option value="IMP">Importación</nb-option>
+                    <nb-option value="EXP">Exportación</nb-option>
+                </nb-select>
+            </div>
+    
+            <div class="form-group">
+                <nb-select class="usuario" multiple  placeholder="Usuario" formControlName="usuario">
+                    <nb-option *ngFor="let usr of usuarios" [value]="usr.username"> {{ usr.username }} </nb-option>
+                </nb-select>
+            </div>
+    
+            <div class="actions">
+                <button nbButton status="success" style="margin-right: 10px;" matRipple type="submit" class="w-100">Buscar</button>
+                <button nbButton status="danger" matRipple type="reset" class="w-100" (click)="cerrarBusqueda()">Cancelar</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { NbDialogRef } from '@nebular/theme';
+import { ServerDataSource } from 'ng2-smart-table';
+import { PostServerDataSource } from '../../../../_dataSource/postserverdatasource';
+import { ParamsBusquedaDTO } from '../../../../_dto/paramsBusquedaDTO';
 import { Usuario } from '../../../../_model/usuario';
+import { PesajeService } from '../../../../_service/pesaje.service';
 import { UsuarioService } from '../../../../_service/usuario.service';
 
 @Component({
@@ -10,14 +15,19 @@ import { UsuarioService } from '../../../../_service/usuario.service';
 })
 export class BusquedaPesajesComponent implements OnInit {
 
+  @Input() title: string;
+
+  source: ServerDataSource;
   form: FormGroup;
   usuarios: Usuario[];
 
   constructor(
-    public usuarioService: UsuarioService
+    private dialogRef: NbDialogRef<any>,
+    public usuarioService: UsuarioService,
+    public pesajeService: PesajeService,
   ) {
     this.form = new FormGroup({
-      'fechas': new FormControl(''),
+      'fechas': new FormControl(),
       'operacion': new FormControl([]),
       'placa': new FormControl(''),
       'usuario': new FormControl([]),
@@ -31,7 +41,21 @@ export class BusquedaPesajesComponent implements OnInit {
   }
 
   buscarPesajes() {
+    const paramsBusqueda: ParamsBusquedaDTO = {
+      placa: this.form.value['placa'],
+      fechaInicial: this.form.value['fechas'].start,
+      fechaFinal: this.form.value['fechas'].end,
+      operacion: this.form.value['operacion'],
+      nombreUsuario: this.form.value['usuario'],
+    }
 
+    this.source = this.pesajeService.buscarPesajesPaginado(paramsBusqueda);
+    this.pesajeService.dataSourceCambio.next(this.source);
+    
+  }
+
+  cerrarBusqueda() {
+    this.dialogRef.close();
   }
 
 }

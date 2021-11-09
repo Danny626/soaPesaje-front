@@ -5,6 +5,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
+import { PostServerDataSource } from '../_dataSource/postserverdatasource';
 import { ParamsBusquedaDTO } from '../_dto/paramsBusquedaDTO';
 import { PesajesSincronizadosDTO } from '../_dto/pesajesSincronizadosDTO';
 import { AuxPesaje } from '../_model/auxPesaje';
@@ -26,6 +27,7 @@ export class PesajeService implements OnDestroy {
   urlTrade: string = `${HOST}/trade`;
   urlCas: string = `${HOST}/cas`;
   pesajeCambio = new Subject<Pesaje[]>();
+  dataSourceCambio = new Subject<ServerDataSource>();
   mensaje = new Subject<string>();
   private localAuxPesaje: AuxPesaje;
 
@@ -234,7 +236,22 @@ export class PesajeService implements OnDestroy {
     return this.http.post(`${this.url}/busquedaPesajes`, paramsBusqueda, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`)
         .set('Content-Type', 'application/json'),
-    });
+    }).pipe(
+      map((data: any) => data.content)
+    );
+  }
+
+  buscarPesajesPaginado(paramsBusqueda: ParamsBusquedaDTO) {
+    return new PostServerDataSource(this.http,
+      {
+        endPoint: `${this.url}/busquedaPesajes`, 
+        dataKey: 'content', 
+        pagerPageKey: 'page', 
+        pagerLimitKey: 'size',
+        totalKey: 'totalElements'
+      },
+      paramsBusqueda
+      );
   }
 
 }

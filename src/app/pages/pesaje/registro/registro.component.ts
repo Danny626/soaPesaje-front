@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NbToastrService, NbWindowConfig, NbWindowService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import jwt_decode from 'jwt-decode';
 import { Subscription } from 'rxjs';
 import { JwtDecode } from '../../../_dto/jwtDecode';
@@ -33,7 +33,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private pesajeService: PesajeService,
-    private windowService: NbWindowService,
+    /* private windowService: NbWindowService, */
+    private dialogService: NbDialogService,
     private toastrService: NbToastrService,
     private guardPesajeService: GuardPesajeService
   ) {
@@ -177,10 +178,11 @@ export class RegistroComponent implements OnInit, OnDestroy {
   }
 
   openWindowPesajes() {
-    this.windowService.open(WindowComponent, { 
-      title: `Pesajes`, 
-      closeOnBackdropClick: false,
-      windowClass: 'modal-adaptive-s1'
+    this.dialogService.open(WindowComponent, {
+      context: {
+        title: 'Pesajes',
+        /* windowClass: 'modal-adaptive-s1' */
+      },
     });
   }
 

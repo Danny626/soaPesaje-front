@@ -8,7 +8,6 @@ import {
   NbDatepickerModule,
   NbIconModule,
   NbInputModule,
-  NbPopoverModule,
   NbRadioModule,
   NbSelectModule
  } from '@nebular/theme';
@@ -38,7 +37,6 @@ import { BusquedaPesajesComponent } from './window/busqueda-pesajes/busqueda-pes
     NbIconModule,
     NbRadioModule,
     SharedModule,
-    NbPopoverModule,
     NbDatepickerModule,
     NbInputModule,
     NbSelectModule,

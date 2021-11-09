@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { ServerDataSource } from 'ng2-smart-table';
 import { Subscription } from 'rxjs';
 import { PesajesSincronizadosDTO } from '../../../_dto/pesajesSincronizadosDTO';
@@ -20,6 +20,8 @@ import { BusquedaPesajesComponent } from './busqueda-pesajes/busqueda-pesajes.co
 })
 export class WindowComponent implements OnInit, OnDestroy {
 
+  @Input() title: string;
+
   source: ServerDataSource;
   listaBalanza: ObjJSON[] = [];
   pesaje: Pesaje;
@@ -27,7 +29,6 @@ export class WindowComponent implements OnInit, OnDestroy {
   selectedRows: Pesaje[];
   pageSize: number = 5;
   flagVerSinc: boolean = false;
-  formBusquedaComponent = BusquedaPesajesComponent;
   private subscription: Subscription;
 
   settings = {
@@ -59,10 +60,12 @@ export class WindowComponent implements OnInit, OnDestroy {
     columns: {},
   };
 
-  constructor(private pesajeService: PesajeService,
+  constructor(
+    private pesajeService: PesajeService,
     private balanzaService: BalanzaService,
     private toastrService: NbToastrService,
-    private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer,
+    private dialogService: NbDialogService,) {
   }
 
   ngOnInit() {
@@ -73,6 +76,9 @@ export class WindowComponent implements OnInit, OnDestroy {
     /* this.subscription = this.pesajeService.pesajeCambio.subscribe(pesajes => {
       this.source.load(pesajes);
     }); */
+    this.subscription = this.pesajeService.dataSourceCambio.subscribe(data => {
+      this.source = data;
+    });
 
     /* this.subscription = this.pesajeService.listarPesajes(this.pageNumber, this.pageSize).subscribe(pesajes => {
       this.source.load(pesajes); */
@@ -350,8 +356,14 @@ export class WindowComponent implements OnInit, OnDestroy {
     })
   }
 
-  buscarPesajes() {
-    console.log('busqueda');
+  openFormBusqueda() {
+    this.dialogService.open(BusquedaPesajesComponent, {
+      hasBackdrop: true,
+      closeOnBackdropClick: true,
+      context: {
+        title: 'Búsqueda Pesajes',
+      },
+    });
   }
 
 }

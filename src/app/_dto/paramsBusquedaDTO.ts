@@ -1,7 +1,7 @@
 export interface ParamsBusquedaDTO {
     fechaInicial:   Date;
     fechaFinal:   Date;
-    operacion:  string;
+    operacion:  string[];
     placa: string;
-    nombreUsuario: string;
+    nombreUsuario: string[];
 }

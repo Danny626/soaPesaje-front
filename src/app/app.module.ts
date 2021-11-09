@@ -52,7 +52,7 @@ registerLocaleData(localeBo);
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es-BO'},
+    /* { provide: LOCALE_ID, useValue: 'es-BO'}, */
   ]
 })
 export class AppModule {

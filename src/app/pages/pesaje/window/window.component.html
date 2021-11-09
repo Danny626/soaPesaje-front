@@ -1,23 +1,35 @@
 <div>
-  <div class="actions">
-    <!-- <div class="busqueda">
-      <button nbButton ghost [nbPopover]="formBusquedaComponent"><nb-icon icon="search"></nb-icon></button>
-    </div> -->
+  <nb-card>
+    <nb-card-header>{{ title }}</nb-card-header>
+    
+    <nb-card-body>
+      <div class="actions">
+        <div class="busqueda">
+          <button nbButton ghost (click)="openFormBusqueda()"><nb-icon icon="search"></nb-icon></button>
+        </div>
+    
+        <div class="actionsSinc">
+          <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()" [disabled]="!selectedRows?.length > 0">Sinc. seleccionados</button>
+          <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
+        </div>
+    
+        <div class="actionsVer">
+          <button type="button" class="btn btn-primary buttonNoSinc" (click)="cargarPesajesNoSincronizados()">Ver no sincronizados</button>
+          <button type="button" class="btn btn-primary buttonTodos" (click)="cargarPesajes()">Ver todos</button>
+        </div>
+      </div>
+      
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarPesaje($event)"
+        (createConfirm)="crearPesaje($event)" class="lista" (custom)="imprimirPesaje($event)" 
+        (editConfirm)="editarPesaje($event)" (userRowSelect)="onUserRowSelect($event)">
+      </ng2-smart-table>
+    </nb-card-body>
 
-    <div class="actionsSinc">
-      <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincSelec" (click)="sincronizarSeleccionados()" [disabled]="!selectedRows?.length > 0">Sinc. seleccionados</button>
-      <button type="button" *ngIf="flagVerSinc" class="btn btn-primary buttonSincTodos" (click)="sincronizarTodos()">Sinc. todos</button>
-    </div>
+    <!-- <nb-card-footer>
+      <button nbButton (click)="ref.close()">Close Dialog</button>
+    </nb-card-footer> -->
+  </nb-card>
 
-    <div class="actionsVer">
-      <button type="button" class="btn btn-primary buttonNoSinc" (click)="cargarPesajesNoSincronizados()">Ver no sincronizados</button>
-      <button type="button" class="btn btn-primary buttonTodos" (click)="cargarPesajes()">Ver todos</button>
-    </div>
-  </div>
   
-  <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="eliminarPesaje($event)"
-    (createConfirm)="crearPesaje($event)" class="lista" (custom)="imprimirPesaje($event)" 
-    (editConfirm)="editarPesaje($event)" (userRowSelect)="onUserRowSelect($event)">
-  </ng2-smart-table>
 
 </div>
