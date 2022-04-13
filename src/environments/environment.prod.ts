@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  HOST: 'https://${HOST}/SoaPesaje-backend',
+  HOST: 'http://localhost:8080/SoaPesaje-backend',
   PATH_ROOT: '/SoaPesaje-backend',
   REINTENTOS: 3,
   TOKEN_AUTH_USERNAME: 'soapesaje',
