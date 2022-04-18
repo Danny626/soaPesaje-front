@@ -41,7 +41,7 @@ testem.log
 Thumbs.db
 
 # environments
-/src/environments/*.ts
+/src/environments/
 
 # pass
 passwords
